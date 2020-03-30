@@ -63,6 +63,13 @@ $('.level01:eq(1)').click(function(){
 
 $('.level01').click(function () {
     $(this).addClass('active').siblings().removeClass('active');
+    $('ul li').removeClass('active');
+})
+
+$('ul li').click(function () {
+    $(this).addClass('active').siblings().removeClass('active');
+    $('.level01').removeClass('active');
+    $('.level01:eq(1)').addClass('active');
 })
 
 //获取用户信息
@@ -77,16 +84,16 @@ $.ajax({
         $('.user_info span').text('欢迎 ' + res.data.nickname);
         //右侧
         $('.user_center_link img').attr('src',res.data.userPic);
-        console.log(res);
+        // console.log(res);
         
     },
     //请求失败
 
-    error:function(res){
-        if(res.statusText=='Forbidden'){
-            window.location.href = 'login.html';
-        }
-    }
+    // error:function(res){
+    //     if(res.statusText=='Forbidden'){
+    //         window.location.href = 'login.html';
+    //     }
+    // }
 
 })
 

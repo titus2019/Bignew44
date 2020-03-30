@@ -69,5 +69,59 @@
         </div>
     </div>
 </body>
+<script>
+    //入口函数
+    $(function () {
+        //获取用户详情信息
+        $.ajax({
+            // url:'http://localhost:8080/api/v1/admin/user/detail',
+            url: BigNew.user_detail,
+            success: function (res) {
+                $('.username').val(res.data.username)
+                $('.password').val(res.data.password)
+                $('.email').val(res.data.email)
+                $('.nickname').val(res.data.nickname)
+
+                $('.user_pic').attr('src', res.data.userPic)
+            }
+        })
+
+        //修改用户信息
+        $('.btn-edit').click(function (e) {
+            e.preventDefault();
+            //获取form元素
+            // var form = document.querySelector('form');
+            var data = new FormData(document.querySelector('form'));
+            //发送请求，用户数据编辑
+            $.ajax({
+                url: BigNew.user_edit,
+                type: 'post',
+                data,
+                //不设置数据类型
+                contentType: false,
+                //不处理数据
+                processData: false,
+                success: function (res) {
+                    console.log(res);
+                    if(res.code==200){
+                        //刷新页面
+                        window.parent.location.reload();
+                    }
+                }
+            })
+        })
+
+        //本地图片预览
+        $('#exampleInputFile').change(function(){
+            var url = URL.createObjectURL(this.files[0]);
+            console.log(this.files);
+            
+            $(this).siblings('img').attr('src',url);
+            
+        })
+
+    })
+
+</script>
 
 </html>
