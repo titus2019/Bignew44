@@ -86,15 +86,14 @@ $.ajax({
         $('.user_center_link img').attr('src',res.data.userPic);
         // console.log(res);
         
-    },
-    //请求失败
+    }
 
-    // error:function(res){
-    //     if(res.statusText=='Forbidden'){
-    //         window.location.href = 'login.html';
-    //     }
-    // }
+})
 
+//登出
+$('.logout').click(function () {
+    window.localStorage.removeItem('token');
+    window.location.href = 'login.html';
 })
 
 </script>
